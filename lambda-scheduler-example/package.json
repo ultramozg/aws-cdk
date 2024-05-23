@@ -1,0 +1,41 @@
+{
+  "name": "getting-started",
+  "version": "0.1.0",
+  "bin": {
+    "getting-started": "bin/getting-started.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "test": "jest",
+    "cdk": "cdk",
+    "deploy": "cdk deploy",
+    "diff": "cdk diff",
+    "synth": "cdk synth",
+    "bootstrap": "cdk bootstrap",
+    "lint": "eslint .",
+    "format": "prettier --write '*.js' '*.json' 'lib/**/*.ts' 'bin/**/*.ts'"
+  },
+  "devDependencies": {
+    "@aws-sdk/client-ses": "^3.484.0",
+    "@types/jest": "^29.5.11",
+    "@types/node": "20.10.4",
+    "@typescript-eslint/eslint-plugin": "^6.17.0",
+    "@typescript-eslint/parser": "^6.17.0",
+    "aws-cdk": "2.117.0",
+    "esbuild": "^0.19.11",
+    "eslint": "^8.56.0",
+    "jest": "^29.7.0",
+    "prettier": "3.1.1",
+    "ts-jest": "^29.1.1",
+    "ts-node": "^10.9.2",
+    "typescript": "~5.3.3"
+  },
+  "dependencies": {
+    "aws-cdk-lib": "2.117.0",
+    "constructs": "^10.0.0"
+  },
+  "peerDependencies": {
+    "@aws-sdk/client-ses": "^3.484.0"
+  }
+}
