@@ -14,7 +14,8 @@
     "synth": "cdk synth",
     "bootstrap": "cdk bootstrap",
     "lint": "eslint .",
-    "format": "prettier --write '*.js' '*.json' 'lib/**/*.ts' 'bin/**/*.ts'"
+    "format": "prettier --write '*.js' '*.json' 'lib/**/*.ts' 'bin/**/*.ts'",
+    "context": "cdk context"
   },
   "devDependencies": {
     "@aws-sdk/client-ses": "^3.484.0",

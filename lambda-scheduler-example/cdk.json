@@ -15,6 +15,15 @@
     ]
   },
   "context": {
+    "@local/environment": {
+      "516478179338": {
+        "eu-central-1": "staging",
+        "eu-west-1": "production"
+      }
+    },
+
+    "@jsherz-com/logLevel/903312262684/eu-west-1": "error",
+
     "@aws-cdk/aws-lambda:recognizeLayerVersion": true,
     "@aws-cdk/core:checkSecretUsage": true,
     "@aws-cdk/core:target-partitions": ["aws", "aws-cn"],
