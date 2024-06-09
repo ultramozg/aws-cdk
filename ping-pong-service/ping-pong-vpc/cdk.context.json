@@ -1,0 +1,49 @@
+{
+  "vpc-provider:account=903312262684:filter.vpc-id=vpc-07188ff7da680a084:region=eu-west-1:returnAsymmetricSubnets=true": {
+    "vpcId": "vpc-07188ff7da680a084",
+    "vpcCidrBlock": "10.0.0.0/16",
+    "ownerAccountId": "903312262684",
+    "availabilityZones": [],
+    "subnetGroups": [
+      {
+        "name": "Public",
+        "type": "Public",
+        "subnets": [
+          {
+            "subnetId": "subnet-028b1f6b7f430fee0",
+            "cidr": "10.0.0.0/20",
+            "availabilityZone": "eu-west-1a",
+            "routeTableId": "rtb-0515bda7fe1c0bd92"
+          }
+        ]
+      },
+      {
+        "name": "Private",
+        "type": "Private",
+        "subnets": [
+          {
+            "subnetId": "subnet-058256a8256141210",
+            "cidr": "10.0.128.0/20",
+            "availabilityZone": "eu-west-1a",
+            "routeTableId": "rtb-0d9929e22d0984378"
+          }
+        ]
+      }
+    ]
+  },
+  "ssm:account=903312262684:parameterName=/lookup-example/availabilityZones:region=eu-west-1": "eu-west-1a",
+  "ssm:account=903312262684:parameterName=/lookup-example/privateSubnetIds:region=eu-west-1": "subnet-058256a8256141210",
+  "ssm:account=903312262684:parameterName=/lookup-example/privateSubnetRouteTableIds:region=eu-west-1": "rtb-0d9929e22d0984378",
+  "ssm:account=903312262684:parameterName=/lookup-example/vpcId:region=eu-west-1": "vpc-07188ff7da680a084",
+  "ssm:account=903312262684:parameterName=/aws/service/ami-amazon-linux-latest/al2023-ami-kernel-6.1-arm64:region=eu-west-1": "ami-0fa60ab544ecd97e0",
+  "availability-zones:account=903312262684:region=eu-west-1": [
+    "eu-west-1a",
+    "eu-west-1b",
+    "eu-west-1c"
+  ],
+  "availability-zones:account=516478179338:region=eu-west-1": [
+    "eu-west-1a",
+    "eu-west-1b",
+    "eu-west-1c"
+  ]
+}

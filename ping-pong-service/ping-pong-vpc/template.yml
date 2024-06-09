@@ -1,0 +1,488 @@
+
+> vpc@0.1.0 synth
+> cdk synth
+
+Resources:
+  VPCB9E5F0B4:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: 10.0.0.0/16
+      EnableDnsHostnames: true
+      EnableDnsSupport: true
+      InstanceTenancy: default
+      Tags:
+        - Key: Name
+          Value: PingPongVpcStack/VPC
+    Metadata:
+      aws:cdk:path: PingPongVpcStack/VPC/Resource
+  VPCPublicSubnet1SubnetB4246D30:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId:
+        Ref: VPCB9E5F0B4
+      AvailabilityZone: eu-west-1a
+      CidrBlock: 10.0.0.0/19
+      MapPublicIpOnLaunch: true
+      Tags:
+        - Key: aws-cdk:subnet-name
+          Value: Public
+        - Key: aws-cdk:subnet-type
+          Value: Public
+        - Key: Name
+          Value: PingPongVpcStack/VPC/PublicSubnet1
+    Metadata:
+      aws:cdk:path: PingPongVpcStack/VPC/PublicSubnet1/Subnet
+  VPCPublicSubnet1RouteTableFEE4B781:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId:
+        Ref: VPCB9E5F0B4
+      Tags:
+        - Key: Name
+          Value: PingPongVpcStack/VPC/PublicSubnet1
+    Metadata:
+      aws:cdk:path: PingPongVpcStack/VPC/PublicSubnet1/RouteTable
+  VPCPublicSubnet1RouteTableAssociation0B0896DC:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId:
+        Ref: VPCPublicSubnet1RouteTableFEE4B781
+      SubnetId:
+        Ref: VPCPublicSubnet1SubnetB4246D30
+    Metadata:
+      aws:cdk:path: PingPongVpcStack/VPC/PublicSubnet1/RouteTableAssociation
+  VPCPublicSubnet1DefaultRoute91CEF279:
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId:
+        Ref: VPCPublicSubnet1RouteTableFEE4B781
+      DestinationCidrBlock: 0.0.0.0/0
+      GatewayId:
+        Ref: VPCIGWB7E252D3
+    DependsOn:
+      - VPCVPCGW99B986DC
+    Metadata:
+      aws:cdk:path: PingPongVpcStack/VPC/PublicSubnet1/DefaultRoute
+  VPCPublicSubnet1EIP6AD938E8:
+    Type: AWS::EC2::EIP
+    Properties:
+      Domain: vpc
+      Tags:
+        - Key: Name
+          Value: PingPongVpcStack/VPC/PublicSubnet1
+    Metadata:
+      aws:cdk:path: PingPongVpcStack/VPC/PublicSubnet1/EIP
+  VPCPublicSubnet1NATGatewayE0556630:
+    Type: AWS::EC2::NatGateway
+    Properties:
+      SubnetId:
+        Ref: VPCPublicSubnet1SubnetB4246D30
+      AllocationId:
+        Fn::GetAtt:
+          - VPCPublicSubnet1EIP6AD938E8
+          - AllocationId
+      Tags:
+        - Key: Name
+          Value: PingPongVpcStack/VPC/PublicSubnet1
+    DependsOn:
+      - VPCPublicSubnet1DefaultRoute91CEF279
+      - VPCPublicSubnet1RouteTableAssociation0B0896DC
+    Metadata:
+      aws:cdk:path: PingPongVpcStack/VPC/PublicSubnet1/NATGateway
+  VPCPublicSubnet2Subnet74179F39:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId:
+        Ref: VPCB9E5F0B4
+      AvailabilityZone: eu-west-1b
+      CidrBlock: 10.0.32.0/19
+      MapPublicIpOnLaunch: true
+      Tags:
+        - Key: aws-cdk:subnet-name
+          Value: Public
+        - Key: aws-cdk:subnet-type
+          Value: Public
+        - Key: Name
+          Value: PingPongVpcStack/VPC/PublicSubnet2
+    Metadata:
+      aws:cdk:path: PingPongVpcStack/VPC/PublicSubnet2/Subnet
+  VPCPublicSubnet2RouteTable6F1A15F1:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId:
+        Ref: VPCB9E5F0B4
+      Tags:
+        - Key: Name
+          Value: PingPongVpcStack/VPC/PublicSubnet2
+    Metadata:
+      aws:cdk:path: PingPongVpcStack/VPC/PublicSubnet2/RouteTable
+  VPCPublicSubnet2RouteTableAssociation5A808732:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId:
+        Ref: VPCPublicSubnet2RouteTable6F1A15F1
+      SubnetId:
+        Ref: VPCPublicSubnet2Subnet74179F39
+    Metadata:
+      aws:cdk:path: PingPongVpcStack/VPC/PublicSubnet2/RouteTableAssociation
+  VPCPublicSubnet2DefaultRouteB7481BBA:
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId:
+        Ref: VPCPublicSubnet2RouteTable6F1A15F1
+      DestinationCidrBlock: 0.0.0.0/0
+      GatewayId:
+        Ref: VPCIGWB7E252D3
+    DependsOn:
+      - VPCVPCGW99B986DC
+    Metadata:
+      aws:cdk:path: PingPongVpcStack/VPC/PublicSubnet2/DefaultRoute
+  VPCPublicSubnet2EIP4947BC00:
+    Type: AWS::EC2::EIP
+    Properties:
+      Domain: vpc
+      Tags:
+        - Key: Name
+          Value: PingPongVpcStack/VPC/PublicSubnet2
+    Metadata:
+      aws:cdk:path: PingPongVpcStack/VPC/PublicSubnet2/EIP
+  VPCPublicSubnet2NATGateway3C070193:
+    Type: AWS::EC2::NatGateway
+    Properties:
+      SubnetId:
+        Ref: VPCPublicSubnet2Subnet74179F39
+      AllocationId:
+        Fn::GetAtt:
+          - VPCPublicSubnet2EIP4947BC00
+          - AllocationId
+      Tags:
+        - Key: Name
+          Value: PingPongVpcStack/VPC/PublicSubnet2
+    DependsOn:
+      - VPCPublicSubnet2DefaultRouteB7481BBA
+      - VPCPublicSubnet2RouteTableAssociation5A808732
+    Metadata:
+      aws:cdk:path: PingPongVpcStack/VPC/PublicSubnet2/NATGateway
+  VPCPublicSubnet3Subnet631C5E25:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId:
+        Ref: VPCB9E5F0B4
+      AvailabilityZone: eu-west-1c
+      CidrBlock: 10.0.64.0/19
+      MapPublicIpOnLaunch: true
+      Tags:
+        - Key: aws-cdk:subnet-name
+          Value: Public
+        - Key: aws-cdk:subnet-type
+          Value: Public
+        - Key: Name
+          Value: PingPongVpcStack/VPC/PublicSubnet3
+    Metadata:
+      aws:cdk:path: PingPongVpcStack/VPC/PublicSubnet3/Subnet
+  VPCPublicSubnet3RouteTable98AE0E14:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId:
+        Ref: VPCB9E5F0B4
+      Tags:
+        - Key: Name
+          Value: PingPongVpcStack/VPC/PublicSubnet3
+    Metadata:
+      aws:cdk:path: PingPongVpcStack/VPC/PublicSubnet3/RouteTable
+  VPCPublicSubnet3RouteTableAssociation427FE0C6:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId:
+        Ref: VPCPublicSubnet3RouteTable98AE0E14
+      SubnetId:
+        Ref: VPCPublicSubnet3Subnet631C5E25
+    Metadata:
+      aws:cdk:path: PingPongVpcStack/VPC/PublicSubnet3/RouteTableAssociation
+  VPCPublicSubnet3DefaultRouteA0D29D46:
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId:
+        Ref: VPCPublicSubnet3RouteTable98AE0E14
+      DestinationCidrBlock: 0.0.0.0/0
+      GatewayId:
+        Ref: VPCIGWB7E252D3
+    DependsOn:
+      - VPCVPCGW99B986DC
+    Metadata:
+      aws:cdk:path: PingPongVpcStack/VPC/PublicSubnet3/DefaultRoute
+  VPCPublicSubnet3EIPAD4BC883:
+    Type: AWS::EC2::EIP
+    Properties:
+      Domain: vpc
+      Tags:
+        - Key: Name
+          Value: PingPongVpcStack/VPC/PublicSubnet3
+    Metadata:
+      aws:cdk:path: PingPongVpcStack/VPC/PublicSubnet3/EIP
+  VPCPublicSubnet3NATGatewayD3048F5C:
+    Type: AWS::EC2::NatGateway
+    Properties:
+      SubnetId:
+        Ref: VPCPublicSubnet3Subnet631C5E25
+      AllocationId:
+        Fn::GetAtt:
+          - VPCPublicSubnet3EIPAD4BC883
+          - AllocationId
+      Tags:
+        - Key: Name
+          Value: PingPongVpcStack/VPC/PublicSubnet3
+    DependsOn:
+      - VPCPublicSubnet3DefaultRouteA0D29D46
+      - VPCPublicSubnet3RouteTableAssociation427FE0C6
+    Metadata:
+      aws:cdk:path: PingPongVpcStack/VPC/PublicSubnet3/NATGateway
+  VPCPrivateSubnet1Subnet8BCA10E0:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId:
+        Ref: VPCB9E5F0B4
+      AvailabilityZone: eu-west-1a
+      CidrBlock: 10.0.96.0/19
+      MapPublicIpOnLaunch: false
+      Tags:
+        - Key: aws-cdk:subnet-name
+          Value: Private
+        - Key: aws-cdk:subnet-type
+          Value: Private
+        - Key: Name
+          Value: PingPongVpcStack/VPC/PrivateSubnet1
+    Metadata:
+      aws:cdk:path: PingPongVpcStack/VPC/PrivateSubnet1/Subnet
+  VPCPrivateSubnet1RouteTableBE8A6027:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId:
+        Ref: VPCB9E5F0B4
+      Tags:
+        - Key: Name
+          Value: PingPongVpcStack/VPC/PrivateSubnet1
+    Metadata:
+      aws:cdk:path: PingPongVpcStack/VPC/PrivateSubnet1/RouteTable
+  VPCPrivateSubnet1RouteTableAssociation347902D1:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId:
+        Ref: VPCPrivateSubnet1RouteTableBE8A6027
+      SubnetId:
+        Ref: VPCPrivateSubnet1Subnet8BCA10E0
+    Metadata:
+      aws:cdk:path: PingPongVpcStack/VPC/PrivateSubnet1/RouteTableAssociation
+  VPCPrivateSubnet1DefaultRouteAE1D6490:
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId:
+        Ref: VPCPrivateSubnet1RouteTableBE8A6027
+      DestinationCidrBlock: 0.0.0.0/0
+      NatGatewayId:
+        Ref: VPCPublicSubnet1NATGatewayE0556630
+    Metadata:
+      aws:cdk:path: PingPongVpcStack/VPC/PrivateSubnet1/DefaultRoute
+  VPCPrivateSubnet2SubnetCFCDAA7A:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId:
+        Ref: VPCB9E5F0B4
+      AvailabilityZone: eu-west-1b
+      CidrBlock: 10.0.128.0/19
+      MapPublicIpOnLaunch: false
+      Tags:
+        - Key: aws-cdk:subnet-name
+          Value: Private
+        - Key: aws-cdk:subnet-type
+          Value: Private
+        - Key: Name
+          Value: PingPongVpcStack/VPC/PrivateSubnet2
+    Metadata:
+      aws:cdk:path: PingPongVpcStack/VPC/PrivateSubnet2/Subnet
+  VPCPrivateSubnet2RouteTable0A19E10E:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId:
+        Ref: VPCB9E5F0B4
+      Tags:
+        - Key: Name
+          Value: PingPongVpcStack/VPC/PrivateSubnet2
+    Metadata:
+      aws:cdk:path: PingPongVpcStack/VPC/PrivateSubnet2/RouteTable
+  VPCPrivateSubnet2RouteTableAssociation0C73D413:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId:
+        Ref: VPCPrivateSubnet2RouteTable0A19E10E
+      SubnetId:
+        Ref: VPCPrivateSubnet2SubnetCFCDAA7A
+    Metadata:
+      aws:cdk:path: PingPongVpcStack/VPC/PrivateSubnet2/RouteTableAssociation
+  VPCPrivateSubnet2DefaultRouteF4F5CFD2:
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId:
+        Ref: VPCPrivateSubnet2RouteTable0A19E10E
+      DestinationCidrBlock: 0.0.0.0/0
+      NatGatewayId:
+        Ref: VPCPublicSubnet2NATGateway3C070193
+    Metadata:
+      aws:cdk:path: PingPongVpcStack/VPC/PrivateSubnet2/DefaultRoute
+  VPCPrivateSubnet3Subnet3EDCD457:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId:
+        Ref: VPCB9E5F0B4
+      AvailabilityZone: eu-west-1c
+      CidrBlock: 10.0.160.0/19
+      MapPublicIpOnLaunch: false
+      Tags:
+        - Key: aws-cdk:subnet-name
+          Value: Private
+        - Key: aws-cdk:subnet-type
+          Value: Private
+        - Key: Name
+          Value: PingPongVpcStack/VPC/PrivateSubnet3
+    Metadata:
+      aws:cdk:path: PingPongVpcStack/VPC/PrivateSubnet3/Subnet
+  VPCPrivateSubnet3RouteTable192186F8:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId:
+        Ref: VPCB9E5F0B4
+      Tags:
+        - Key: Name
+          Value: PingPongVpcStack/VPC/PrivateSubnet3
+    Metadata:
+      aws:cdk:path: PingPongVpcStack/VPC/PrivateSubnet3/RouteTable
+  VPCPrivateSubnet3RouteTableAssociationC28D144E:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId:
+        Ref: VPCPrivateSubnet3RouteTable192186F8
+      SubnetId:
+        Ref: VPCPrivateSubnet3Subnet3EDCD457
+    Metadata:
+      aws:cdk:path: PingPongVpcStack/VPC/PrivateSubnet3/RouteTableAssociation
+  VPCPrivateSubnet3DefaultRoute27F311AE:
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId:
+        Ref: VPCPrivateSubnet3RouteTable192186F8
+      DestinationCidrBlock: 0.0.0.0/0
+      NatGatewayId:
+        Ref: VPCPublicSubnet3NATGatewayD3048F5C
+    Metadata:
+      aws:cdk:path: PingPongVpcStack/VPC/PrivateSubnet3/DefaultRoute
+  VPCIGWB7E252D3:
+    Type: AWS::EC2::InternetGateway
+    Properties:
+      Tags:
+        - Key: Name
+          Value: PingPongVpcStack/VPC
+    Metadata:
+      aws:cdk:path: PingPongVpcStack/VPC/IGW
+  VPCVPCGW99B986DC:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      VpcId:
+        Ref: VPCB9E5F0B4
+      InternetGatewayId:
+        Ref: VPCIGWB7E252D3
+    Metadata:
+      aws:cdk:path: PingPongVpcStack/VPC/VPCGW
+  VPCRestrictDefaultSecurityGroupCustomResource59474679:
+    Type: Custom::VpcRestrictDefaultSG
+    Properties:
+      ServiceToken:
+        Fn::GetAtt:
+          - CustomVpcRestrictDefaultSGCustomResourceProviderHandlerDC833E5E
+          - Arn
+      DefaultSecurityGroupId:
+        Fn::GetAtt:
+          - VPCB9E5F0B4
+          - DefaultSecurityGroup
+      Account: "903312262684"
+    UpdateReplacePolicy: Delete
+    DeletionPolicy: Delete
+    Metadata:
+      aws:cdk:path: PingPongVpcStack/VPC/RestrictDefaultSecurityGroupCustomResource/Default
+  CustomVpcRestrictDefaultSGCustomResourceProviderRole26592FE0:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Action: sts:AssumeRole
+            Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+      ManagedPolicyArns:
+        - Fn::Sub: arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+      Policies:
+        - PolicyName: Inline
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action:
+                  - ec2:AuthorizeSecurityGroupIngress
+                  - ec2:AuthorizeSecurityGroupEgress
+                  - ec2:RevokeSecurityGroupIngress
+                  - ec2:RevokeSecurityGroupEgress
+                Resource:
+                  - Fn::Join:
+                      - ""
+                      - - arn:aws:ec2:eu-west-1:903312262684:security-group/
+                        - Fn::GetAtt:
+                            - VPCB9E5F0B4
+                            - DefaultSecurityGroup
+    Metadata:
+      aws:cdk:path: PingPongVpcStack/Custom::VpcRestrictDefaultSGCustomResourceProvider/Role
+  CustomVpcRestrictDefaultSGCustomResourceProviderHandlerDC833E5E:
+    Type: AWS::Lambda::Function
+    Properties:
+      Code:
+        S3Bucket: cdk-hnb659fds-assets-903312262684-eu-west-1
+        S3Key: e77031893275c08bcaa0a774aa8b611727afd045b3b5d8e1e6f0f04063d9d386.zip
+      Timeout: 900
+      MemorySize: 128
+      Handler: __entrypoint__.handler
+      Role:
+        Fn::GetAtt:
+          - CustomVpcRestrictDefaultSGCustomResourceProviderRole26592FE0
+          - Arn
+      Runtime: nodejs16.x
+      Description: Lambda function for removing all inbound/outbound rules from the VPC default security group
+    DependsOn:
+      - CustomVpcRestrictDefaultSGCustomResourceProviderRole26592FE0
+    Metadata:
+      aws:cdk:path: PingPongVpcStack/Custom::VpcRestrictDefaultSGCustomResourceProvider/Handler
+      aws:asset:path: asset.e77031893275c08bcaa0a774aa8b611727afd045b3b5d8e1e6f0f04063d9d386
+      aws:asset:property: Code
+  CDKMetadata:
+    Type: AWS::CDK::Metadata
+    Properties:
+      Analytics: v2:deflate64:H4sIAAAAAAAA/21Quw7CMAz8FvY0PAZgRQghFhS1iBWlqQFDm6DEaYUQ/44rHlmYfHe2zmdP5HwmRwPdhcxU16zGUj4K0uYqWDqAmcjH/mbE8mj3ailULGs0RSwtUK8llLtIsNNlDUlP2iIEZ1ATOvsb7sFqo/qy1bTWBJ2+C+WxZZiMN5bAM/4OvJN82II46rkBS0+RQ3DRG/aNgVyTKO/731LetViBFxwPiK8+oT09hXUVyEsYtuO5HE/5OZeAmPloCRuQ+bu+AMUa9gc4AQAA
+    Metadata:
+      aws:cdk:path: PingPongVpcStack/CDKMetadata/Default
+Parameters:
+  BootstrapVersion:
+    Type: AWS::SSM::Parameter::Value<String>
+    Default: /cdk-bootstrap/hnb659fds/version
+    Description: Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]
+Rules:
+  CheckBootstrapVersion:
+    Assertions:
+      - Assert:
+          Fn::Not:
+            - Fn::Contains:
+                - - "1"
+                  - "2"
+                  - "3"
+                  - "4"
+                  - "5"
+                - Ref: BootstrapVersion
+        AssertDescription: CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI.
+
