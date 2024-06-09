@@ -1,0 +1,259 @@
+
+> getting-started@0.1.0 synth
+> cdk synth
+
+Resources:
+  BrushYourTeethFunctionServiceRoleF1C1F2FD:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+          - Action: sts:AssumeRole
+            Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+        Version: "2012-10-17"
+      ManagedPolicyArns:
+        - Fn::Join:
+            - ""
+            - - "arn:"
+              - Ref: AWS::Partition
+              - :iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+      Tags:
+        - Key: environment
+          Value: production
+        - Key: service
+          Value: very-alarming
+    Metadata:
+      aws:cdk:path: VeryAlarmingStack/BrushYourTeethFunction/ServiceRole/Resource
+  BrushYourTeethFunctionServiceRoleDefaultPolicyD9B57620:
+    Type: AWS::IAM::Policy
+    Properties:
+      PolicyDocument:
+        Statement:
+          - Action:
+              - xray:PutTelemetryRecords
+              - xray:PutTraceSegments
+            Effect: Allow
+            Resource: "*"
+          - Action: ses:SendEmail
+            Effect: Allow
+            Resource: "*"
+            Sid: AllowSendingEmail
+        Version: "2012-10-17"
+      PolicyName: BrushYourTeethFunctionServiceRoleDefaultPolicyD9B57620
+      Roles:
+        - Ref: BrushYourTeethFunctionServiceRoleF1C1F2FD
+    Metadata:
+      aws:cdk:path: VeryAlarmingStack/BrushYourTeethFunction/ServiceRole/DefaultPolicy/Resource
+  BrushYourTeethFunction8FB9D478:
+    Type: AWS::Lambda::Function
+    Properties:
+      Code:
+        S3Bucket: cdk-hnb659fds-assets-903312262684-eu-west-1
+        S3Key: 5e1024ec55de36e8686fe41866e6048f7fb53a27f26404442170afad767d1080.zip
+      Role:
+        Fn::GetAtt:
+          - BrushYourTeethFunctionServiceRoleF1C1F2FD
+          - Arn
+      Architectures:
+        - arm64
+      Environment:
+        Variables:
+          AWS_NODEJS_CONNECTION_REUSE_ENABLED: "1"
+      Handler: index.handler
+      Runtime: nodejs18.x
+      Tags:
+        - Key: environment
+          Value: production
+        - Key: service
+          Value: very-alarming
+      Timeout: 5
+      TracingConfig:
+        Mode: Active
+    DependsOn:
+      - BrushYourTeethFunctionServiceRoleDefaultPolicyD9B57620
+      - BrushYourTeethFunctionServiceRoleF1C1F2FD
+    Metadata:
+      aws:cdk:path: VeryAlarmingStack/BrushYourTeethFunction/Resource
+      aws:asset:path: asset.5e1024ec55de36e8686fe41866e6048f7fb53a27f26404442170afad767d1080
+      aws:asset:is-bundled: true
+      aws:asset:property: Code
+  DurationAlarm711DC812:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      ComparisonOperator: GreaterThanOrEqualToThreshold
+      EvaluationPeriods: 10
+      DatapointsToAlarm: 5
+      Dimensions:
+        - Name: FunctionName
+          Value:
+            Ref: BrushYourTeethFunction8FB9D478
+      ExtendedStatistic: p95.00
+      MetricName: Duration
+      Namespace: AWS/Lambda
+      Period: 60
+      Threshold: 100
+      TreatMissingData: notBreaching
+    Metadata:
+      aws:cdk:path: VeryAlarmingStack/DurationAlarm/Alarm/Resource
+  DurationAlarmAlarmTags3667A50D:
+    Type: AWS::CloudFormation::CustomResource
+    Properties:
+      ServiceToken:
+        Fn::GetAtt:
+          - f4bf9fd626df41f7b45910d88b5b9ac5DE2C82CF
+          - Arn
+      AlarmArn:
+        Fn::GetAtt:
+          - DurationAlarm711DC812
+          - Arn
+      Tags:
+        - Key: criticality
+          Value: very important
+        - Key: environment
+          Value: production
+        - Key: service
+          Value: very-alarming
+    DependsOn:
+      - DurationAlarm711DC812
+    UpdateReplacePolicy: Delete
+    DeletionPolicy: Delete
+    Metadata:
+      aws:cdk:path: VeryAlarmingStack/DurationAlarm/AlarmTags/Default
+  f4bf9fd626df41f7b45910d88b5b9ac5ServiceRole8F0A6E96:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+          - Action: sts:AssumeRole
+            Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+        Version: "2012-10-17"
+      ManagedPolicyArns:
+        - Fn::Join:
+            - ""
+            - - "arn:"
+              - Ref: AWS::Partition
+              - :iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+      Tags:
+        - Key: environment
+          Value: production
+        - Key: service
+          Value: very-alarming
+    Metadata:
+      aws:cdk:path: VeryAlarmingStack/f4bf9fd6-26df-41f7-b459-10d88b5b9ac5/ServiceRole/Resource
+  f4bf9fd626df41f7b45910d88b5b9ac5ServiceRoleDefaultPolicy53A1A7D8:
+    Type: AWS::IAM::Policy
+    Properties:
+      PolicyDocument:
+        Statement:
+          - Action:
+              - cloudwatch:TagResource
+              - cloudwatch:UntagResource
+            Effect: Allow
+            Resource: "*"
+            Sid: AllowTaggingAlarms
+        Version: "2012-10-17"
+      PolicyName: f4bf9fd626df41f7b45910d88b5b9ac5ServiceRoleDefaultPolicy53A1A7D8
+      Roles:
+        - Ref: f4bf9fd626df41f7b45910d88b5b9ac5ServiceRole8F0A6E96
+    Metadata:
+      aws:cdk:path: VeryAlarmingStack/f4bf9fd6-26df-41f7-b459-10d88b5b9ac5/ServiceRole/DefaultPolicy/Resource
+  f4bf9fd626df41f7b45910d88b5b9ac5DE2C82CF:
+    Type: AWS::Lambda::Function
+    Properties:
+      Code:
+        S3Bucket: cdk-hnb659fds-assets-903312262684-eu-west-1
+        S3Key: 82716bd8d6a69d42cc7bb5d78dbb42180e9ac51a3c119bf15332b18c838dacd2.zip
+      Role:
+        Fn::GetAtt:
+          - f4bf9fd626df41f7b45910d88b5b9ac5ServiceRole8F0A6E96
+          - Arn
+      Architectures:
+        - arm64
+      Environment:
+        Variables:
+          AWS_NODEJS_CONNECTION_REUSE_ENABLED: "1"
+      Handler: index.handler
+      Runtime: nodejs18.x
+      Tags:
+        - Key: environment
+          Value: production
+        - Key: service
+          Value: very-alarming
+      Timeout: 30
+    DependsOn:
+      - f4bf9fd626df41f7b45910d88b5b9ac5ServiceRoleDefaultPolicy53A1A7D8
+      - f4bf9fd626df41f7b45910d88b5b9ac5ServiceRole8F0A6E96
+    Metadata:
+      aws:cdk:path: VeryAlarmingStack/f4bf9fd6-26df-41f7-b459-10d88b5b9ac5/Resource
+      aws:asset:path: asset.82716bd8d6a69d42cc7bb5d78dbb42180e9ac51a3c119bf15332b18c838dacd2
+      aws:asset:is-bundled: true
+      aws:asset:property: Code
+  ErrorsAlarm3D3330D3:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      ComparisonOperator: GreaterThanOrEqualToThreshold
+      EvaluationPeriods: 10
+      DatapointsToAlarm: 2
+      Dimensions:
+        - Name: FunctionName
+          Value:
+            Ref: BrushYourTeethFunction8FB9D478
+      MetricName: Errors
+      Namespace: AWS/Lambda
+      Period: 60
+      Statistic: Sum
+      Threshold: 1
+      TreatMissingData: notBreaching
+    Metadata:
+      aws:cdk:path: VeryAlarmingStack/ErrorsAlarm/Alarm/Resource
+  ErrorsAlarmAlarmTagsE7ADB51A:
+    Type: AWS::CloudFormation::CustomResource
+    Properties:
+      ServiceToken:
+        Fn::GetAtt:
+          - f4bf9fd626df41f7b45910d88b5b9ac5DE2C82CF
+          - Arn
+      AlarmArn:
+        Fn::GetAtt:
+          - ErrorsAlarm3D3330D3
+          - Arn
+      Tags:
+        - Key: environment
+          Value: production
+        - Key: service
+          Value: very-alarming
+    DependsOn:
+      - ErrorsAlarm3D3330D3
+    UpdateReplacePolicy: Delete
+    DeletionPolicy: Delete
+    Metadata:
+      aws:cdk:path: VeryAlarmingStack/ErrorsAlarm/AlarmTags/Default
+  CDKMetadata:
+    Type: AWS::CDK::Metadata
+    Properties:
+      Analytics: v2:deflate64:H4sIAAAAAAAA/z2PzQrCQAyEn8V7Gv9Ae62CR5H6ACVu17rt/kCzq0jpu7vbSk/fTBKGyQ7zI25W9OFM1F2m1QOHuyfRQRxVgybzqKmyrpYt43XCJVjhlbOgyOBQOi3h/LQTb04r8U12ViPwviJm6RmLhOjxFEQn/YlYwhyP8X4JFdqF+kNevHAoNPUmpU1iHKGU7EIvJExhsWejbAPnwN6ZZZfK/PUIqTm2vH5vc9we4qctK5X1wXplJJYzf+FNu4wFAQAA
+    Metadata:
+      aws:cdk:path: VeryAlarmingStack/CDKMetadata/Default
+Parameters:
+  BootstrapVersion:
+    Type: AWS::SSM::Parameter::Value<String>
+    Default: /cdk-bootstrap/hnb659fds/version
+    Description: Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]
+Rules:
+  CheckBootstrapVersion:
+    Assertions:
+      - Assert:
+          Fn::Not:
+            - Fn::Contains:
+                - - "1"
+                  - "2"
+                  - "3"
+                  - "4"
+                  - "5"
+                - Ref: BootstrapVersion
+        AssertDescription: CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI.
+

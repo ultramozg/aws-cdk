@@ -1,0 +1,118 @@
+{
+  "ssm:account=903312262684:parameterName=/ping-pong/cluster/name:region=eu-west-1": "PingPongVpcStack-ClusterEB0386A7-W2QrlRtdRpPC",
+  "vpc-provider:account=903312262684:filter.tag:project=ping-pong:region=eu-west-1:returnAsymmetricSubnets=true": {
+    "vpcId": "vpc-02864a1ed83e223e7",
+    "vpcCidrBlock": "10.0.0.0/16",
+    "ownerAccountId": "903312262684",
+    "availabilityZones": [],
+    "subnetGroups": [
+      {
+        "name": "Private",
+        "type": "Private",
+        "subnets": [
+          {
+            "subnetId": "subnet-0f1e53008bb8989e9",
+            "cidr": "10.0.96.0/19",
+            "availabilityZone": "eu-west-1a",
+            "routeTableId": "rtb-09456a3b5ae0272b8"
+          },
+          {
+            "subnetId": "subnet-0b7fdee0338b03430",
+            "cidr": "10.0.128.0/19",
+            "availabilityZone": "eu-west-1b",
+            "routeTableId": "rtb-01d92444b005182b7"
+          },
+          {
+            "subnetId": "subnet-0f76d11d0420aee26",
+            "cidr": "10.0.160.0/19",
+            "availabilityZone": "eu-west-1c",
+            "routeTableId": "rtb-04d6075ec101f953b"
+          }
+        ]
+      },
+      {
+        "name": "Public",
+        "type": "Public",
+        "subnets": [
+          {
+            "subnetId": "subnet-0c8c225a371f3cafc",
+            "cidr": "10.0.0.0/19",
+            "availabilityZone": "eu-west-1a",
+            "routeTableId": "rtb-0f91aaac1b7868724"
+          },
+          {
+            "subnetId": "subnet-003067175cfe44677",
+            "cidr": "10.0.32.0/19",
+            "availabilityZone": "eu-west-1b",
+            "routeTableId": "rtb-0203b417ada8883d1"
+          },
+          {
+            "subnetId": "subnet-0bb565d9f002de348",
+            "cidr": "10.0.64.0/19",
+            "availabilityZone": "eu-west-1c",
+            "routeTableId": "rtb-0d0405716127bd4ac"
+          }
+        ]
+      }
+    ]
+  },
+  "ssm:account=903312262684:parameterName=/ping-pong/cloud-map-namespace/id:region=eu-west-1": "ns-7cfifiuncqdqpgm4",
+  "ssm:account=516478179338:parameterName=/ping-pong/cluster/name:region=eu-west-1": "PingPongVpcStack-ClusterEB0386A7-6Tec1WUnebLv",
+  "vpc-provider:account=516478179338:filter.tag:project=ping-pong:region=eu-west-1:returnAsymmetricSubnets=true": {
+    "vpcId": "vpc-07b1263ece3d453a9",
+    "vpcCidrBlock": "10.0.0.0/16",
+    "ownerAccountId": "516478179338",
+    "availabilityZones": [],
+    "subnetGroups": [
+      {
+        "name": "Public",
+        "type": "Public",
+        "subnets": [
+          {
+            "subnetId": "subnet-06c6149c5c0fc5504",
+            "cidr": "10.0.0.0/19",
+            "availabilityZone": "eu-west-1a",
+            "routeTableId": "rtb-0ca0f581bb89d44a3"
+          },
+          {
+            "subnetId": "subnet-0d4860e4df1d5d025",
+            "cidr": "10.0.32.0/19",
+            "availabilityZone": "eu-west-1b",
+            "routeTableId": "rtb-01314d4efa48ecae9"
+          },
+          {
+            "subnetId": "subnet-083a4044acd52722e",
+            "cidr": "10.0.64.0/19",
+            "availabilityZone": "eu-west-1c",
+            "routeTableId": "rtb-0058f38402249c8fc"
+          }
+        ]
+      },
+      {
+        "name": "Private",
+        "type": "Private",
+        "subnets": [
+          {
+            "subnetId": "subnet-03051ce55b4211a0a",
+            "cidr": "10.0.96.0/19",
+            "availabilityZone": "eu-west-1a",
+            "routeTableId": "rtb-0c7bc3bcebce45b0b"
+          },
+          {
+            "subnetId": "subnet-0e66c51d7bd21c278",
+            "cidr": "10.0.128.0/19",
+            "availabilityZone": "eu-west-1b",
+            "routeTableId": "rtb-0719b5794eb3dd658"
+          },
+          {
+            "subnetId": "subnet-0e8fa076d293bc284",
+            "cidr": "10.0.160.0/19",
+            "availabilityZone": "eu-west-1c",
+            "routeTableId": "rtb-04c4bac657ead6da3"
+          }
+        ]
+      }
+    ]
+  },
+  "ssm:account=516478179338:parameterName=/ping-pong/cloud-map-namespace/id:region=eu-west-1": "ns-mryrcblechpklhq2"
+}

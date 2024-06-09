@@ -1,0 +1,52 @@
+{
+  "name": "pong-service",
+  "version": "0.1.0",
+  "bin": {
+    "pong-service": "dist/bin/pong-service.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "build:watch": "tsc -w",
+    "test": "jest",
+    "cdk": "cdk",
+    "deploy": "cdk deploy",
+    "diff": "cdk diff",
+    "synth": "cdk synth",
+    "bootstrap": "cdk bootstrap",
+    "context": "cdk context",
+    "import": "cdk import",
+    "destroy": "cdk destroy",
+    "watch": "cdk watch",
+    "lint": "eslint .",
+    "format": "prettier --write '*.js' '*.json' 'lib/**/*.ts' 'bin/**/*.ts'"
+  },
+  "devDependencies": {
+    "@aws-sdk/client-ses": "^3.370.0",
+    "@types/jest": "^29.5.1",
+    "@types/node": "20.1.7",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "aws-cdk": "2.87.0",
+    "aws-sdk-client-mock": "^3.0.0",
+    "esbuild": "^0.18.12",
+    "eslint": "^8.44.0",
+    "jest": "^29.5.0",
+    "nock": "^13.3.2",
+    "prettier": "3.0.0",
+    "ts-jest": "^29.1.0",
+    "ts-node": "^10.9.1",
+    "typescript": "~5.1.3"
+  },
+  "dependencies": {
+    "@aws-sdk/client-cloudwatch": "^3.370.0",
+    "@cdk-course/ping-pong-service": "^1.1.0",
+    "aws-cdk-lib": "2.87.0",
+    "axios": "^1.4.0",
+    "cdk-nag": "^2.27.76",
+    "constructs": "^10.0.0",
+    "zod": "^3.21.4"
+  },
+  "peerDependencies": {
+    "@aws-sdk/client-ses": "^3.370.0"
+  }
+}

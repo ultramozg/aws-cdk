@@ -1,0 +1,60 @@
+{
+  "ssm:account=903312262684:parameterName=/ping-pong/cluster/name:region=eu-west-1": "PingPongVpcStack-ClusterEB0386A7-W2QrlRtdRpPC",
+  "vpc-provider:account=903312262684:filter.tag:project=ping-pong:region=eu-west-1:returnAsymmetricSubnets=true": {
+    "vpcId": "vpc-02864a1ed83e223e7",
+    "vpcCidrBlock": "10.0.0.0/16",
+    "ownerAccountId": "903312262684",
+    "availabilityZones": [],
+    "subnetGroups": [
+      {
+        "name": "Private",
+        "type": "Private",
+        "subnets": [
+          {
+            "subnetId": "subnet-0f1e53008bb8989e9",
+            "cidr": "10.0.96.0/19",
+            "availabilityZone": "eu-west-1a",
+            "routeTableId": "rtb-09456a3b5ae0272b8"
+          },
+          {
+            "subnetId": "subnet-0b7fdee0338b03430",
+            "cidr": "10.0.128.0/19",
+            "availabilityZone": "eu-west-1b",
+            "routeTableId": "rtb-01d92444b005182b7"
+          },
+          {
+            "subnetId": "subnet-0f76d11d0420aee26",
+            "cidr": "10.0.160.0/19",
+            "availabilityZone": "eu-west-1c",
+            "routeTableId": "rtb-04d6075ec101f953b"
+          }
+        ]
+      },
+      {
+        "name": "Public",
+        "type": "Public",
+        "subnets": [
+          {
+            "subnetId": "subnet-0c8c225a371f3cafc",
+            "cidr": "10.0.0.0/19",
+            "availabilityZone": "eu-west-1a",
+            "routeTableId": "rtb-0f91aaac1b7868724"
+          },
+          {
+            "subnetId": "subnet-003067175cfe44677",
+            "cidr": "10.0.32.0/19",
+            "availabilityZone": "eu-west-1b",
+            "routeTableId": "rtb-0203b417ada8883d1"
+          },
+          {
+            "subnetId": "subnet-0bb565d9f002de348",
+            "cidr": "10.0.64.0/19",
+            "availabilityZone": "eu-west-1c",
+            "routeTableId": "rtb-0d0405716127bd4ac"
+          }
+        ]
+      }
+    ]
+  },
+  "ssm:account=903312262684:parameterName=/ping-pong/cloud-map-namespace/id:region=eu-west-1": "ns-7cfifiuncqdqpgm4"
+}
